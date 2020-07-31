@@ -6,7 +6,7 @@ RUN mkdir -p ~/ffmpeg_sources ~/bin
 RUN cd ~/ffmpeg_sources && wget https://www.nasm.us/pub/nasm/releasebuilds/2.13.03/nasm-2.13.03.tar.bz2 && tar xjvf nasm-2.13.03.tar.bz2 && cd nasm-2.13.03 && ./autogen.sh && PATH="$HOME/bin:$PATH" ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" && make && make install && \
     cd ~/ffmpeg_sources && wget -O ffmpeg-snapshot.tar.bz2 https://ffmpeg.org/releases/ffmpeg-4.0.2.tar.bz2 && tar xjvf ffmpeg-snapshot.tar.bz2 && cd ffmpeg-4.0.2 && \
     export BUILDDIR=$HOME &&  export PATH=$PATH:/root/bin/ && \
-    cd ~/ffmpeg_sources &&  git clone git://git.videolan.org/x264.git && cd x264 && ./configure --prefix="$BUILDDIR" --enable-pic && make && make install && \
+    cd ~/ffmpeg_sources &&  git clone git@github.com:mirror/x264.git && cd x264 && ./configure --prefix="$BUILDDIR" --enable-pic && make && make install && \
     cd ../ffmpeg-4.0.2/ && \
     PKG_CONFIG_PATH="$BUILDDIR/lib/pkgconfig" ./configure --prefix="$BUILDDIR" --extra-cflags="-I$BUILDDIR/include" --extra-ldflags="-L$BUILDDIR/lib -ldl" --bindir="$HOME/bin"  --enable-gpl --enable-libx264  --disable-libvorbis --enable-libpulse && make && make install && \
     apt-get clean && \
